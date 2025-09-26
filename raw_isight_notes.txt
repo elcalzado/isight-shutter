@@ -1,0 +1,55 @@
+These are my notes from beginning to end as I was figuring out how it worked.
+
+Red cable: Power
+Black cable: GND
+
+No continuity between GND/Power and Shared/Left/Right.
+
+Measured resistances (FireWire unplugged, other modules connected):
+- GND->Shared: 1.793 kOhm
+- GND->Left: 148.7 Ohm
+- GND->Right: 5.749-5.855 kOhm (Varied within that small margin)
+- Power->Shared: 119.6 kOhm
+- Power->Left: 116.9 kOhm
+- Power->Right: 142.3 kOhm
+- Shared->Left: 798 Ohm
+- Shared->Right: 4.043 kOhm
+- Left->Right: 6.004-6.094 kOhm (Varied within that small margin)
+
+There are two resistors on the mainboard that are wired as follows: 
+- GND->R1->Right
+- GND->R2->Left
+
+Shared pin connects the set of pins on Sony D2450R 546 C39V marked on the [image](https://ibb.co/h1V9wPgf).
+
+Based on the probing and the [datasheet for the D2450R](https://www.alldatasheet.net/datasheet-pdf/view/47003/SONY/CXD2450R.html) the shared pin connects to +3.3V.
+
+Left and Right pins do not connect to anything on the D2450R.
+
+Shared/Right pins connect to the DSP TMS320DSC25 CB 5CA33JJ ZHK chip. Unsure to what pins exactly since all the contacts are super tiny.
+
+Shared is connected to a few pins along the sides of TMS320DSC25. Unable to determine what those pins do. Should be +3.3V based on previous measurements.
+
+Right is connected to a pin on the bottom of the TMS320DSC25. Unable to determine what that pin is though.
+
+Voltages in open position (black probe on first node):
+- GND->Shared: 3.035 V
+- GND->Left: 1.884 V
+- GND->Right: 0.004 V
+- Left->Shared: 1.167 V
+- Right->Shared: 3.000 V
+- Right->Left: 1.852 V
+
+Voltages in open position (black probe on first node):
+- GND->Shared: 3.062 V
+- GND->Left: 1.894 V
+- GND->Right: 2.919 V
+- Left->Shared: 1.168 V
+- Right->Shared: 0.143 V
+- Right->Left: -1.025 V
+
+Figured it out! The sensor is wired as follows:
++3.3V->Shared->Collector->Emitter(Right)->R1(~5.7-5.9 kOhm)->GND
++3.3V->Shared->Cathode->Anode(Left)->R2(~150 Ohm)->GND
+
+Right pin is HIGH (~3V) when the shutter is closed and LOW (~0V) when it's open.
