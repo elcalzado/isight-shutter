@@ -50,11 +50,11 @@ Therefore:
 		   ├───────────────────────────────┐
 		   │                               │
 		   │                 (Phototransistor Collector)
-	(IR LED Cathode)                       │
+	(IR LED Anode)                         │
 		   │                               │
 		   │                               │
 		   │                 (Phototransistor Emitter/Right)
-	(IR LED Anode / Left)                  ├───────────────── -> OUTPUT
+	(IR LED Cathode / Left)                ├───────────────── -> OUTPUT
 		   │                               │
 		R2 ~150 Ω                       R1 ~5.8 kΩ
 		   │                               │
