@@ -50,6 +50,7 @@ Voltages in open position (black probe on first node):
 
 Figured it out! The sensor is wired as follows:
 +3.3V->Shared->Collector->Emitter(Right)->R1(~5.7-5.9 kOhm)->GND
-+3.3V->Shared->Cathode->Anode(Left)->R2(~150 Ohm)->GND
++3.3V->Shared->Anode->Cathode(Left)->R2(~150 Ohm)->GND
+
 
 Right pin is HIGH (~3V) when the shutter is closed and LOW (~0V) when it's open.
